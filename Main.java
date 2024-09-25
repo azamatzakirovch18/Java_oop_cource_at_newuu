@@ -1,180 +1,166 @@
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    // constructor functions
+    public static boolean isInteger(char a){
+        return Character.isDigit(a);
+    }
+    public static int swap(int[] a){
+        int temp = a[0];
+        a[0] = a[1];
+        a[1] = temp;
+        return temp;
+    }
+
+
 
     public static void first() {
-        System.out.print("Task 1\n");
+        String text = "Happy 19th anniversary and it is will be your day. Today is 21th October 2024";
+        int sum = 0, number = 0, length = text.length() - 1;
 
-        System.out.println("""
-                Name: Student Name
-                Adress: Tashkent City ,Chilanzar 9
-                passcode: ********
-                """);
+        for (int i = 0; i < length; i++) {
+            char element1 = text.charAt(i), element2 = text.charAt(i + 1);
+
+            if (isInteger(element1) && isInteger(element2)){
+                number = number * 10 + (element1 - '0');
+            } else if (isInteger(element1) && !isInteger(element2)) {
+                number = number * 10 + (element1 - '0');
+                sum = sum + number;
+                number = 0;
+            }
+        }
+        if (isInteger(text.charAt(length - 1))) {
+            number = number * 10 + (text.charAt(length - 1) - '0');
+        }
+
+        sum = sum + number;
+        System.out.println(sum);
     }
 
-    public static void second() {
-        System.out.print("Task 2\n");
-        Scanner name = new Scanner(System.in);
-        String new_name;
-        System.out.print("Enter new name: ");
-        new_name = name.nextLine();
+    public static int second(String str, char a){
+        int sum = 0,length = str.length();
 
-        System.out.print("Hi " + new_name);
+        for(int i = 0; i < length; i++){
+            char element = str.charAt(i);
+
+            if(element==a){
+                sum ++;
+            }
+
+        }
+
+        return sum;
     }
 
-    public static void third(){
-        Double height,length,perimetre,area;
-        Scanner input = new Scanner(System.in);
-        System.out.print("Task 3 \n");
-        System.out.print("Enter height: ");
-        height = input.nextDouble();
+    public static int third(){
+        String word = "Hello World";
+        int length = word.length(),sum = 0;
+        for(int i = 0; i < length; i++){
+            char element = word.charAt(i);
+            if (element >= 65 && element <= 90){
+                sum ++;
+            }
+        }
 
-        System.out.print("Enter length: ");
-        length = input.nextDouble();
+        return sum;
 
-        perimetre = 2 * (length + height);
-        area = length * height;
-
-        System.out.print("Area is " + area);
-        System.out.print(" and Perimeter is " + perimetre);
     }
 
-    public static void fourth(){
-        Scanner input = new Scanner(System.in);
-        Double radius,area,length,volume;
-        System.out.print("Task 4\n");
-        System.out.print("Enter radius: ");
-        radius = input.nextDouble();
+    public static void fourth() {
+        int[] arr = {1, 9, 3, 4, 2, 6, 3, 6, 8, 4, 0};
+        int length = arr.length;
 
-        System.out.print("Enter length: ");
-        length = input.nextDouble();
+        for(int i = 0; i < length; i++){
+            for (int j = i+1; j < length; j++){
+                if (arr[i] > arr[j]){
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
 
-        area = 3.14 * radius * radius;
-        volume = area * length;
-
-        System.out.print("""
-                if height is %f and radius is %f
-                then area is %f and volume is %f
-                """.formatted(length,radius,area,volume));
+        System.out.println(arr[0]);
     }
 
     public static void fifth(){
-        Scanner inout = new Scanner (System.in);
-        System.out.print("Task 5\n");
-        Double height,side,area,volume,constants;
-        System.out.print("""
-                Let's imagine there is 1 pyramid and every side is equal.
-                Task is find the volume of this pyramid, Your task is 
-                enter 1 side:  """ + " ");
-        side = inout.nextDouble();
+        String string = "cBBbBaA";
+        int len = string.length();
+        char [] letters = new char[len];
+        for(int i = 0; i < len; i++){
+            letters[i] = string.charAt(i);
+        }
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j < len-1; j++) {
+                if(letters[j] > letters[j+1]){
+                    char temp = letters[j];
+                    letters[j] = letters[j+1];
+                    letters[j+1] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < len; i++) {
+            System.out.print(letters[i]);
+        }
 
-        System.out.print("And the height is: ");
-        height = inout.nextDouble();
 
-        constants = Math.sqrt(3) / 4;
-
-        area = constants * side * side;
-        volume = area * height;
-
-        System.out.print("""
-                Area is: %f \n
-                Volume is: %f
-                """.formatted(area,volume));
     }
 
-    public static void sixth(){
-        System.out.print("Task 6\n");
-        Scanner input = new Scanner (System.in);
-        Double meal,total,with_tax,with_tip;
+    public static boolean sixth(){
+        Scanner input = new Scanner(System.in);
+        int size,count = 0;
+        System.out.print("Please enter the size of the array: ");
+        size = input.nextInt();
+        int[] arr = new int[size];
+        for(int i = 0; i < size; i++){
+            arr[i] = input.nextInt();
+        }
 
-        final double TAX = 0.08;
-        final double TIP = 0.20;
+        for(int i = 0; i < size; i++){
+            for (int j = i+1; j < size; j++){
+                if (j - i <= 3 && arr[i] == arr[j]){
+                    count++;
+                }else{
+                    count = 0;
+                }
+                if (count == 3){
+                    return true;
+                }
 
-        System.out.print("Please enter the cost of meal in USD: ");
-        meal = input.nextDouble();
-
-        with_tax = meal * TAX;
-        with_tip = meal * TIP;
-
-        total = with_tax + with_tip + meal;
-
-        System.out.print("""
-                Your meal is $%.2f.
-                Tax rate: %.0f%%
-                Tip rate: %.0f%%
-                Tax: $%.2f
-                Tip: $%.2f
-                Total: $%.2f
-                """.formatted(meal,TAX*100,TIP*100,with_tax,with_tip,total));
+            }
+        }
+        return false;
     }
 
-    public static void seventh(){
-        System.out.print("Task 7\n");
-        Scanner input = new Scanner (System.in);
-        Double distance,cost,mile_per_gallon,total;
-        System.out.print("Please enter the distance: ");
-        distance = input.nextDouble();
+    public static boolean seventh(){
+        String card_number = "9860123456788901";
+        int sum = 0,l = card_number.length(),o = 0;
+        int[] card_number_in_array = new int[l],reversed_card_number_in_array = new int[l];
+        for (int i = 0; i < card_number.length(); i++) {
+            card_number_in_array[i] = card_number.charAt(i) - '0';
+        }
+        for (int i = l - 1; i >= 0; i--) {
+            reversed_card_number_in_array[o] = card_number_in_array[i];
+            o ++;
+        }
+        for (int i = 0; i < card_number.length(); i++) {
+            if(i % 2 != 0){
+                if (reversed_card_number_in_array[i] * 2 > 9){
+                    reversed_card_number_in_array[i] = reversed_card_number_in_array[i] * 2 - 9;
+                }
+                else{
+                    reversed_card_number_in_array[i] = reversed_card_number_in_array[i] * 2;
+                }
+            }
+        }
+        for (int i = 0; i < card_number.length(); i++) {
+            sum = sum + reversed_card_number_in_array[i];
+        }
+        return sum % 10 == 0;
 
-        System.out.print("Please enter miles per gallon: ");
-        mile_per_gallon = input.nextDouble();
-
-        System.out.print("Please nter price per gallon: ");
-        cost = input.nextDouble();
-
-        total = (distance / mile_per_gallon) * cost;
-
-        System.out.printf("""
-                
-                
-                
-                If you want to drive for %.2f miles
-                your engine uses 1 galon for %.2f miles
-                and 1 gallon fuel is $%.2f
-                
-                and you must spent $%.2f for this trip
-                """.formatted(distance,mile_per_gallon,cost,total));
-    }
-
-    public static void eighth(){
-        System.out.print("Task 8\n");
-        Scanner input = new Scanner (System.in);
-        int number,s,t,l;
-        System.out.print("Please enter the digit with length is 4: ");
-        number = input.nextInt();
-        l = number % 10;
-        number = number / 10;
-        t = number % 10;
-        number = number / 10;
-        s = number % 10;
-        number = number / 10;
-        System.out.print(l+t+s+number);
-    }
-
-    public static void ninth(){
-
-        System.out.print("Task 9\n");
-        Scanner input = new Scanner (System.in);
-        int s,t,l,min,max,middle;
-        System.out.print("1: ");
-        s = input.nextInt();
-
-        System.out.print("2: ");
-        t = input.nextInt();
-
-        System.out.print("3: ");
-        l = input.nextInt();
-
-        min = Math.min(s, Math.min(t, l));
-        max = Math.max(s, Math.max(t, l));
-        middle = (s + t + l) - min - max;
-
-        System.out.print(min + " " + middle + " " + max);
     }
 
     public static void main(String[] args) {
-        // from here you can run all tasks
-        first();
+        System.out.print(seventh());
     }
 }
